@@ -1,16 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Developer Profile</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 40px; }
-        h1 { color: #333; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Journal – Private AI-Powered Journaling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --accent: #fbbf24;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, #0f172a, #1e293b);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+    }
+
+    header h1 span {
+      color: var(--text);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .screenshot {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--panel);
+      margin: 1rem 0;
+    }
+
+    ul.features {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.features li::before {
+      content: '✓';
+      color: var(--accent);
+      margin-right: 0.5rem;
+    }
+
+    form {
+      background-color: var(--panel);
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    input[type="email"] {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: var(--accent);
+      color: #000;
+      font-weight: 600;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.875rem;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: var(--panel);
+      padding: 2rem;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      color: var(--text);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      font-size: 1.5rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Starliapps!</h1>
-    <p>This will be updated soon.</p>
+
+  <header>
+    <h1>🧠 <span>Smart Journal</span></h1>
+    <a href="#signup" style="color: var(--accent); font-weight: 600;">Join Beta</a>
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>Your private, AI-powered journal</h2>
+      <p>Smart Journal helps you reflect, grow, and understand yourself better — with help from AI that categorizes, connects, and analyzes your thoughts.</p>
+      <img src="screenshot.jpg" alt="Screenshot of Smart Journal" class="screenshot" />
+    </div>
+
+    <div class="section">
+      <h2>What makes Smart Journal different?</h2>
+      <ul class="features">
+        <li>🌱 Personal insights powered by AI</li>
+        <li>🔒 Local-first privacy — your data, your control</li>
+        <li>🧠 Tags, summaries, and emotional themes</li>
+        <li>📤 Export your entries for use in LLMs or other apps</li>
+      </ul>
+    </div>
+
+    <div class="section" id="signup">
+      <h2>Join the beta waitlist</h2>
+      <p>We’re inviting early testers to try the app and help shape its future. You’ll get early access and the chance to influence development.</p>
+      <form action="https://YOUR_BASIN_ENDPOINT_URL" method="POST">
+        <input type="email" name="email" placeholder="you@example.com" required />
+        <button type="submit">Request Access</button>
+      </form>
+      <p style="font-size: 0.85rem; margin-top: 0.5rem;">
+        ✅ During beta, please avoid submitting personal or sensitive data.<br>
+        AI responses may vary and are based on 3rd-party free models.<br>
+        <strong>No liability accepted during this test phase.</strong>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>FAQ</h2>
+      <p><strong>Is my data private?</strong><br>
+      During beta, data is sent to third-party models which may use inputs to improve services. Please don’t enter personal or sensitive information.</p>
+
+      <p><strong>Can I export my journal?</strong><br>
+      Yes! You can export in markdown format for safe backup and import into other systems like NotebookLM.</p>
+
+      <p><strong>Will it be free?</strong><br>
+      The beta is free. We plan to offer a one-time purchase or small subscription once stable.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="#" onclick="openModal('terms')">Terms of Use</a> |
+      <a href="#" onclick="openModal('privacy')">Privacy Policy</a><br>
+      Made with 🧠 by an indie dev, 2025.
+    </p>
+  </footer>
+
+  <!-- Terms Modal -->
+  <div class="modal" id="termsModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('terms')">&times;</span>
+      <h2>Terms of Use</h2>
+      <p><strong>Testing Phase:</strong> Smart Journal is currently in a beta phase and offered as-is for testing and feedback.</p>
+      <p><strong>No Sensitive Data:</strong> Users must not submit personal, sensitive, or confidential information during this phase.</p>
+      <p><strong>Third-party AI:</strong> Smart Journal uses free third-party AI models, which may use inputs for model training and improvement.</p>
+      <p><strong>Liability Disclaimer:</strong> We are not liable for any damages, loss, or issues resulting from using the app during its testing phase.</p>
+      <p><strong>Modifications:</strong> Terms may change without prior notice. Continued use implies acceptance of changes.</p>
+    </div>
+  </div>
+
+  <!-- Privacy Modal -->
+  <div class="modal" id="privacyModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('privacy')">&times;</span>
+      <h2>Privacy Policy</h2>
+      <p><strong>Data Collection:</strong> We collect email addresses solely for waitlist purposes via our Basin form provider.</p>
+      <p><strong>Usage:</strong> Journal entries are temporarily stored and processed through third-party AI APIs. No guarantees of privacy can be made during beta.</p>
+      <p><strong>No Sensitive Info:</strong> Do not submit personally identifiable or sensitive information while the app uses experimental AI models.</p>
+      <p><strong>Retention:</strong> Your waitlist email will not be sold, shared, or spammed. You may unsubscribe at any time.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'flex';
+    }
+    function closeModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'none';
+    }
+
+    // Close on escape or outside click
+    window.addEventListener("click", (e) => {
+      document.querySelectorAll(".modal").forEach((modal) => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+    });
+  </script>
 </body>
 </html>
